@@ -1,0 +1,38 @@
+;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
+;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
+#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname SchemaF) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
+; 1. Schritt: Kurzbeschreibung
+; monatlichen Rechnungsbetrag für Tarif Billig-Strom berechnen
+
+; 2. Schritt: Funktionssignatur zwischen Kurzbeschreibung und Funktion
+;(: billig-strom (natural -> rational))
+
+; 3. Schritt: Tests
+;(check-expect (billig-strom 10) 6.8)
+;(check-expect (billig-strom 20) 8.7)
+
+; 4. Schritt: Das Gerüst - einen Funktionsnamen und die nötigen Argumente überlegen
+;(define billig-strom
+;  (lambda (kWh)
+;    ...))
+
+; 5. Schritt: Rumpf
+;(define billig-strom
+;  (lambda (kWh)
+;    (+ 4.9 (* 0.19 kWh))))
+
+;;;; jetzt kommt das Beispiel am Stück ;;;;;
+
+; monatlichen Rechnungsbetrag für Tarif Billig-Strom berechnen
+
+(: billig-strom (natural -> rational))
+
+(check-expect (billig-strom 10) 6.8)
+(check-expect (billig-strom 20) 8.7)
+
+(define billig-strom
+  (lambda (kWh)
+    (+ 4.9 (* 0.19 kWh))))
+
+
+
