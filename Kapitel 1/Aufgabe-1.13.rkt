@@ -10,42 +10,43 @@
 (check-expect (time->beats 0 0 0 0) 0)
 (check-expect (time->beats 0 1 26 4) 1)
 (check-expect (time->beats 23 58 33 6) 999)
+(check-expect (time->beats 24 0 0 0) 1000)
 
 (define time->beats
   (lambda (h m s d)
-   (d->beats (+ (h->d h) (m->d m) (* 10 s) d))))
+   (tenth-of-a-second->beats (+ (hours->tenth-of-a-second h) (minutes->tenth-of-a-second m) (* 10 s) d))))
 
 ; Konvertiert Zehntelsekunden in Beats
 
-(: d->beats (natural -> rational ))
+(: tenth-of-a-second->beats (natural -> rational ))
 
-(check-expect (d->beats 0) 0)
-(check-expect (d->beats 864) 1)
-(check-expect (d->beats 864000) 1000)
+(check-expect (tenth-of-a-second->beats 0) 0)
+(check-expect (tenth-of-a-second->beats 864) 1)
+(check-expect (tenth-of-a-second->beats 864000) 1000)
 
-(define d->beats
+(define tenth-of-a-second->beats
   (lambda (d)
     (/ d 864)))
 
 ; Konvertiert Stunden in Millisekunden
 
-(: h->d (natural -> natural))
+(: hours->tenth-of-a-second (natural -> natural))
 
-(check-expect (h->d 1) 36000)
-(check-expect (h->d 0) 0)
+(check-expect (hours->tenth-of-a-second 1) 36000)
+(check-expect (hours->tenth-of-a-second 0) 0)
 
-(define h->d
+(define hours->tenth-of-a-second
   (lambda (h)
     (* h 3600 10)))
 
 ; Konvertiert Minuten in Millisekunden
 
-(: m->d (natural -> natural))
+(: minutes->tenth-of-a-second (natural -> natural))
 
-(check-expect (m->d 1) 600)
-(check-expect (m->d 60) 36000)
+(check-expect (minutes->tenth-of-a-second 1) 600)
+(check-expect (minutes->tenth-of-a-second 60) 36000)
 
-(define m->d
+(define minutes->tenth-of-a-second
   (lambda (m)
     (* m 600)))
 
